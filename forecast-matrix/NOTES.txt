@@ -1,0 +1,26 @@
+GitHub Repo: https://github.com/adonitakos/
+
+Project Description: https://app.theheadstarter.com/dashboard/assignment/project/7dceed06-4315-4cea-a834-065bddf479d8/part-1/
+OpenMeteo API: https://open-meteo.com/
+NewsAPI: https://newsapi.org/
+
+--- Tutorials ---
+JavaScript Fetch: https://www.youtube.com/watch?v=cuEtnrL9-H0
+ChartJS: https://www.youtube.com/watch?v=RF57yDglDfE
+Integrate Chart.js Using React with Data from a REST API: https://www.youtube.com/watch?v=yOousFGfmZc
+Twilio: https://www.youtube.com/watch?v=KDFhWC1HnxI
+
+React.js Hooks w/ Google Places Autocomplete - Receive Full Address & Coordinates: https://youtu.be/GeNUKYPEieA
+How to add Place Autocomplete input to a map in React: https://youtu.be/BL2XVTqz9Ek
+
+====================== DATA ======================
+----- OpenMeteo API ------
+- Time
+- Temperature (Farenheit)
+- Precipitation (percentage %)
+- Wind (mph / miles per hour)
+- Humidity (percentage %)
+- Air Quality Index (integer + categorical rating)
+
+----- NewsAPI -----
+

@@ -1,0 +1,65 @@
+import React, { useState } from 'react';
+
+function WeatherDashboard() {
+  const [city, setCity] = useState('');
+  const [weatherData, setWeatherData] = useState(null);
+
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`https://api.open-meteo.com/weather?city=${city}`);
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Weather Dashboard</h1>
+      <div>
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="Enter a city"
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
+
+      {weatherData && (
+        <div>
+          <h2>Location: {weatherData.city_name}</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Temperature (°F)</th>
+                <th>Precipitation Probability (%)</th>
+                <th>Wind Speed (mph)</th>
+                <th>Sunrise</th>
+                <th>Sunset</th>
+              </tr>
+            </thead>
+            <tbody>
+              {weatherData.hourly.time.map((time, index) => (
+                <tr key={index}>
+                  <td>{time.slice(0, 10)}</td>
+                  <td>{time.slice(11)}</td>
+                  <td>{weatherData.hourly.temperature_2m[index]}</td>
+                  <td>{weatherData.hourly.precipitation_probability[index]}</td>
+                  <td>{weatherData.hourly.windspeed_10m[index]}</td>
+                  <td>{weatherData.sunrise}</td>
+                  <td>{weatherData.sunset}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default WeatherDashboard;
