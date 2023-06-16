@@ -51,3 +51,15 @@ export const SearchIcon = styled.svg`
     width: 1rem;
     height: 1rem;
 `;
+
+export const SearchResults = styled.div`
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+`;
