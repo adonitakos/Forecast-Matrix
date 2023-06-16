@@ -1,13 +1,11 @@
 // File: /src/components/TestComponents/NewsTest.js
-
 import React, { useState, useEffect } from 'react';
+import { newsApiKey } from '../../config';
 
 function NewsTest() {
   const [data, setData] = useState();
 
-  const newsApiKey = ''
-  
-  let user_location = 'New%20York'; // just for test; will later integrate w/ search bar
+  const user_location = 'New%20York'; // just for test; will later integrate w/ search bar
 
   useEffect(() => {
     fetch(
@@ -28,13 +26,13 @@ function NewsTest() {
                 <h2>{article.title}</h2>
                 <p>Author: {article.author}</p>
                 <a href={article.url}>Read More</a> <br />
-                {article.urlToImage && <img src={article.urlToImage} alt="Article" style={{width:'20%'}}/>}
+                {article.urlToImage && <img src={article.urlToImage} alt="NO IMAGE" style={{width:'20%'}}/>}
               </div>
             ))}
         </>
       )}
     </>
   );
-}
+} // <--- NewsTest() function ends here
 
 export default NewsTest;
