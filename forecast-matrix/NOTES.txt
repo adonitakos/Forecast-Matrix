@@ -1,4 +1,4 @@
-GitHub Repo: https://github.com/adonitakos/
+GitHub Repo: https://github.com/adonitakos/Forecast-Matrix
 
 Project Description: https://app.theheadstarter.com/dashboard/assignment/project/7dceed06-4315-4cea-a834-065bddf479d8/part-1/
 OpenMeteo API: https://open-meteo.com/
