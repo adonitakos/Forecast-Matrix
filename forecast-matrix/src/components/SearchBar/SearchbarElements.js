@@ -53,6 +53,8 @@ export const SearchIcon = styled.svg`
 `;
 
 export const SearchResults = styled.div`
+  margin-top: 10px;
+
   ul {
     list-style: none;
     padding: 0;

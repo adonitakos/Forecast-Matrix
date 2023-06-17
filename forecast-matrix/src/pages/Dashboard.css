@@ -1,8 +1,12 @@
+/*
+File: /src/pages/Dashboard.css
+*/
+
 .dashboard-container {
-    text-align: center;
-  }
+  text-align: center;
+}
   
-  .dashboard-heading {
-    margin-top: 50px;
-  }
+.dashboard-heading {
+  margin-top: 50px;
+}
   

@@ -1,5 +1,6 @@
+// File: /src/components/News/News.js
 import React, { useState, useEffect } from 'react';
-import { newsApiKey } from '../../config';
+import { newsApiKey } from '../../config'; // <--- /src/config.js
 
 function News({ selectedCity }) {
   const [data, setData] = useState();
@@ -30,9 +31,9 @@ function News({ selectedCity }) {
               </div>
             ))}
         </>
-      )}
+      )} 
     </>
   );
-}
+} // <--- News() function ends here
 
 export default News;

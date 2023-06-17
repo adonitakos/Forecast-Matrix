@@ -9,7 +9,7 @@ function ErrorPage() {
         ERROR: PAGE DOES NOT EXIST
       </h1>
     </>
-  )
+  );
 } // <--- ErrorPage() function ends here
 
 export default ErrorPage;
