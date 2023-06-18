@@ -1,0 +1,25 @@
+.weather-slideshow {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+  }
+  
+  .weather-card {
+    flex: 0 0 200px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #e0f2ff;
+    border-radius: 20px;
+  }
+  
+  .weather-slideshow::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .weather-card time{
+    background-color: #003366;
+    color: #ffffff;
+    padding: 5px;
+    
+  }
