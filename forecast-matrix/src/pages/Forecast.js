@@ -14,8 +14,8 @@ export default function Forecast() {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [showWeatherCard, setShowWeatherCard] = useState(false);
-  const [weatherData, setWeatherData] = useState(null);
-  const [aqiData, setAQIData] = useState(null);
+  const [humidity, setHumidity] = useState('');
+  const [windspeed, setWindspeed] = useState('');
 
   const handleCitySelection = async(city, lat,lon) => {
     setSelectedCity(city);
@@ -26,8 +26,8 @@ export default function Forecast() {
     const aqiData = await fetchAQIData(lat, lon);
     console.log(weatherData);
     console.log(aqiData);
-    setWeatherData(weatherData);
-    setAQIData(aqiData);
+    const pm2_5Values = weatherData.hourly.pm2_5;//Humidity
+    setWindspeed(weatherData.hourly.windspeed_10m);
     //setHumidity(humidity);
   }; // <--- handleCitySelection() async function ends here
 
@@ -65,9 +65,11 @@ export default function Forecast() {
 
   return (
     <div className="dashboard-container">
-        <h1 className='dashboard-heading'>Dashboard</h1>
-        <Searchbar onCitySelect={handleCitySelection} />
+      <h1 className='dashboard-heading'>Dashboard</h1>
+      <Searchbar onCitySelect={handleCitySelection} />
 
+      <div className="content-container">
+        {showWeatherCard && <WeatherCard city={selectedCity} humidity={humidity} windspeed={windspeed}/>}
         <div div className="content-container">
             <div className='WeatherCard'>
                 {showWeatherCard && weatherData && weatherData.hourly && (
@@ -83,12 +85,12 @@ export default function Forecast() {
           
         <div className="weather-container">
           <Weather latitude={latitude} longitude={longitude} />
-            </div>
         </div>
+      </div>
 
-        <div className="news-container">
-            <News selectedCity={selectedCity} />
-        </div>
+      <div className="news-container">
+        <News selectedCity={selectedCity} />
+      </div>
     </div>
   );
 

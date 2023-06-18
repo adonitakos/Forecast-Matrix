@@ -5,16 +5,18 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // Pages
 import ErrorPage from './pages/ErrorPage';
 import News from './components/News/News';
-import Weather from './components/Weather/Weather';
+
 import Forecast from './pages/Forecast';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Forecast />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="*" element={<ErrorPage/>} />
         <Route path="/news" element={<News/>} />
+        
+        <Route path="/forecast" element={<Forecast/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
 
 
