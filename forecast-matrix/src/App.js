@@ -18,7 +18,8 @@ function App() {
         <Route path="*" element={<ErrorPage/>} />
         <Route path="/testpage" element={<TestPage/>} />
         <Route path="/news" element={<News/>} />
-        
+        <Route path="/Weather" element={<Weather/>} />
+
         <Route path="/dashboard" element={<Dashboard/>} />
 
 

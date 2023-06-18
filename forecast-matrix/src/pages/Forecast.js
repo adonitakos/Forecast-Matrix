@@ -84,7 +84,7 @@ export default function Forecast() {
           
         <div className="weather-container">
           <Weather latitude={latitude} longitude={longitude} />
-            </div>
+        </div>
         </div>
 
         <div className="news-container">

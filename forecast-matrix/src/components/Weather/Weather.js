@@ -1,31 +1,26 @@
-// File: /src/components/Weather/Weather.js
+// File: /src/components/TestComponents/WeatherTest.js
 import React, { useState, useEffect } from 'react';
 
-// Parameters taken here
-function Weather(latitude, longitude) {
-  
+function WeatherTest({ latitude, longitude }) {
   const [weatherData, setWeatherData] = useState();
   const [aqiData, setAQIData] = useState();
 
-  // Fetch Weather data from OpenMeteo API
   useEffect(() => {
     fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=&longitude=&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&past_days=7&timezone=America%2FNew_York`
+      "https://api.open-meteo.com/v1/forecast?latitude=40.71&longitude=-74.01&hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&past_days=7"
     )
       .then((response) => response.json())
       .then((json) => setWeatherData(json));
-  }, []); // <--- useEffect() ends here
+  },[] );
 
-  // Fetch Air Quality Index (AQI) data from OpenMeteo API
   useEffect(() => {
     fetch(
-      `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${latitude}&longitude=${longitude}&hourly=pm2_5&timezone=America%2FNew_York&past_days=7`
+      'https://air-quality-api.open-meteo.com/v1/air-quality?latitude=40.71&longitude=-74.01&hourly=pm2_5&timezone=America%2FNew_York&past_days=7'
     )
       .then((response) => response.json())
       .then((json) => setAQIData(json));
-  }, []); // <--- useEffect() ends here
+  }, []);
 
-  // Format the Data & Time output
   const getDateTime = (timeString) => {
     const date = new Date(timeString);
     const year = date.getFullYear();
@@ -39,14 +34,12 @@ function Weather(latitude, longitude) {
     return `${formattedDate} ${formattedTime}`;
   };
   
-  // Return weatherData from past and upcoming week: 
-  // data: {Coordinates, Time & Date, Temperature, Humidity, Rain, Windspeed, AQI}
   return (
     <>
       {weatherData && aqiData && (
         <>
-          <p>Latitude: {weatherData.latitude}</p>
-          <p>Longitude: {weatherData.longitude}</p>
+          <p>Latitude: {latitude}</p>
+          <p>Longitude: {longitude}</p>
           <p>------------------------------------</p>
           {weatherData.hourly &&
             weatherData.hourly.temperature_2m &&
@@ -82,11 +75,11 @@ function Weather(latitude, longitude) {
                   <p>--------------------------------------</p>
                 </div>
               );
-            })} 
+            })}
         </>
       )}
     </>
-  ); // <--- primary return() statement ends here
-} // <--- Weather() function ends here
+  );
+} // <--- WeatherTest() function ends here
 
-export default Weather;
+export default WeatherTest;
