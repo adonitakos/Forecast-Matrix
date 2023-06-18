@@ -2,7 +2,7 @@
 import React from 'react'
 import './WeatherCard.css'
 
-const WeatherCard = ({ city, temperature, windSpeed, aqi, pressure }) => {
+const WeatherCard = ({ city, temperature, windspeed, aqi, pressure, humidity }) => {
   const currentDate = new Date().toISOString().split('T')[0]; 
   
   return(
@@ -73,7 +73,7 @@ const WeatherCard = ({ city, temperature, windSpeed, aqi, pressure }) => {
         <div class="card2">
             <div class="upper">
                 <div class="humidity">
-                    <div class="humiditytext">Humidity<br />30%</div>
+                    <div class="humiditytext">Humidity<br />{Math.round(humidity)}</div>
                       <svg xmlSpace="preserve" viewBox="0 0 30 30" height="30px" width="30px" y="0px" x="0px" xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" class="humiditysvg">
                           <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
                           AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEUAAAAAAP9NerV/f39O
@@ -99,7 +99,7 @@ const WeatherCard = ({ city, temperature, windSpeed, aqi, pressure }) => {
                 </div> 
 
                 <div class="air">
-                    <div class="airtext">Wind<br />{windSpeed} Km/h</div>
+                    <div class="airtext">Wind<br />{Math.round(windspeed)} MPH</div>
                       <svg class="airsvg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" xmlSpace="preserve">  
                           <image id="image0" width="30" height="30" x="0" y="0" 
                           href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
@@ -170,7 +170,7 @@ const WeatherCard = ({ city, temperature, windSpeed, aqi, pressure }) => {
                     LTAyLTE4VDA1OjE1OjI2KzAwOjAw38W0IwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMi0x
                     OFQwNToxNToyNiswMDowMIjQlfwAAAAASUVORK5CYII="></image>
                     </svg>
-                    <div class="realfeeltext">Real Feel<br />{temperature} °C</div>
+                    <div class="realfeeltext">Real Feel<br />{temperature} °F</div>
                 </div> 
 
                 <div class="pressure">

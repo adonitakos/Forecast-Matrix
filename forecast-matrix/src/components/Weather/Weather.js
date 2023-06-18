@@ -1,29 +1,34 @@
+// File: /src/components/Weather/Weather.js
 import React, { useState, useEffect } from 'react';
-import { WeatherData, fetchAQIData } from '../Weather/WeatherData';
 
-export default function Weather({ latitude, longitude }) {
+// Parameters taken here
+function Weather(latitude, longitude) {
   const [weatherData, setWeatherData] = useState();
   const [aqiData, setAQIData] = useState();
-  const [humidity, setHumidity] = useState();
 
+  // Fetch Weather data from OpenMeteo API
   useEffect(() => {
-    const fetchData = async () => {
-      const weatherData = await WeatherData(latitude, longitude);
-      const aqiData = await fetchAQIData(latitude, longitude);
-      setWeatherData(weatherData);
-      setAQIData(aqiData);
-      if (weatherData && weatherData.hourly && weatherData.hourly.relativehumidity_2m) {
-        setHumidity(weatherData.hourly.relativehumidity_2m);
-      }
-    };
+    fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&past_days=7`
+    )
+      .then((response) => response.json())
+      .then((json) => setWeatherData(json));
+  }, []); // <--- useEffect() ends here
 
-    fetchData();
-  }, [latitude, longitude]);
+  // Fetch Air Quality Index (AQI) data from OpenMeteo API
+  useEffect(() => {
+    fetch(
+      `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${latitude}&longitude=${longitude}&hourly=pm2_5&timezone=America%2FNew_York&past_days=7`
+    )
+      .then((response) => response.json())
+      .then((json) => setAQIData(json));
+  }, []); // <--- useEffect() ends here
 
+  // Format the Data & Time output
   const getDateTime = (timeString) => {
     const date = new Date(timeString);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 to month as it is zero-based
     const day = String(date.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
     const hours = String(date.getHours()).padStart(2, '0');
@@ -32,7 +37,9 @@ export default function Weather({ latitude, longitude }) {
     const formattedTime = `${(hours % 12) || 12}:${minutes} ${meridiem}`;
     return `${formattedDate} ${formattedTime}`;
   };
-
+  
+  // Return weatherData from past and upcoming week: 
+  // data: {Coordinates, Time & Date, Temperature, Humidity, Rain, Windspeed, AQI}
   return (
     <>
       {weatherData && aqiData && (
@@ -74,9 +81,11 @@ export default function Weather({ latitude, longitude }) {
                   <p>--------------------------------------</p>
                 </div>
               );
-            })}
+            })} 
         </>
       )}
     </>
-  );
-}
+  ); // <--- primary return() statement ends here
+} // <--- Weather() function ends here
+
+export default Weather;
