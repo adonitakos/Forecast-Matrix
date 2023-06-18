@@ -3,13 +3,32 @@ import React, { useState } from 'react';
 import Searchbar from '../components/SearchBar/Searchbar';
 import News from '../components/News/News';
 import "./Dashboard.css"
+import "../components/TestComponents/WeatherCard.css"
+import WeatherCard from '../components/TestComponents/WeatherCard';
+import Weather from '../components/Weather/Weather';
+import { WeatherData, fetchAQIData } from '../components/Weather/WeatherData';
 
 export default function Forecast() {
   
   const [selectedCity, setSelectedCity] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [showWeatherCard, setShowWeatherCard] = useState(false);
+  const [humidity, setHumidity] = useState('');
+  const [windspeed, setWindspeed] = useState('');
 
-  const handleCitySelection = (city) => {
+  const handleCitySelection = async(city, lat,lon) => {
     setSelectedCity(city);
+    setLatitude(lat); 
+    setLongitude(lon);
+    setShowWeatherCard(true);
+    const weatherData = await WeatherData(lat, lon);
+    const aqiData = await fetchAQIData(lat, lon);
+    console.log(weatherData);
+    console.log(aqiData);
+    const pm2_5Values = weatherData.hourly.pm2_5;//Humidity
+    setWindspeed(weatherData.hourly.windspeed_10m);
+    //setHumidity(humidity);
   };
 
   // Get the CURRENT Data & Time of the user
@@ -46,9 +65,19 @@ export default function Forecast() {
 
   return (
     <div className="dashboard-container">
-      <h1 className='Dashboard Heading'>Dashboard</h1>
+      <h1 className='dashboard-heading'>Dashboard</h1>
       <Searchbar onCitySelect={handleCitySelection} />
-      <News selectedCity={selectedCity} />
+
+      <div className="content-container">
+        {showWeatherCard && <WeatherCard city={selectedCity} humidity={humidity} windspeed={windspeed}/>}
+        <div className="weather-container">
+          <Weather latitude={latitude} longitude={longitude} />
+        </div>
+      </div>
+
+      <div className="news-container">
+        <News selectedCity={selectedCity} />
+      </div>
     </div>
   );
 

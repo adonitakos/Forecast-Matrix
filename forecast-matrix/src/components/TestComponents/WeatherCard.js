@@ -2,7 +2,7 @@
 import React from 'react'
 import './WeatherCard.css'
 
-function WeatherCard() {
+const WeatherCard = ({ city, windSpeed }) => {
   return (
     <>
   <div className="cardm">
@@ -65,7 +65,7 @@ function WeatherCard() {
         </svg>
 
         <div class="main">23 °C</div>
-        <div class="mainsub">Dunmore, Ireland</div>
+        <div class="mainsub">{city}</div>
       </div>
 
         <div class="card2">
@@ -97,7 +97,7 @@ function WeatherCard() {
                 </div> 
 
                 <div class="air">
-                    <div class="airtext">Wind<br />8 Km/h</div>
+                    <div class="airtext">Wind<br />{windSpeed} Km/h</div>
                     <svg class="airsvg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" xmlSpace="preserve">  
                         <image id="image0" width="30" height="30" x="0" y="0" 
                         href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAABGdBTUEAALGPC/xhBQAAACBjSFJN

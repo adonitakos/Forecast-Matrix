@@ -17,29 +17,26 @@ export default function Searchbar({ onCitySelect }) {
         try {
           const response = await fetch(
             `https://geocoding-api.open-meteo.com/v1/search?limit=5&name=${searchQuery}`
-          ); // Ex: https://geocoding-api.open-meteo.com/v1/search?limit=5&name=Chicago
+          );
 
           if (!cancelRequest) {
             const { results } = await response.json();
-            // Map Suggestions - added lat and long for geo conversion
-            // If you want more for the drop-down, add it here (look at the doc page)
             const towns = results.map(item => ({
               city: item.name,
               country: item.country,
               state: item.admin1 || item.admin2 || item.admin3 || item.admin4 || '',
               latitude: item.latitude,
               longitude: item.longitude,
-            })); // <--- results.map ends here
+            }));
             setSuggestions(towns);
-          } // <--- if(!cancelRequest) statement ends here
+          }
         } catch (error) {
           console.log('Error fetching suggestions:', error);
         }
-      } // <--- if(searchQuery) statement ends here
-      else {
+      } else {
         setSuggestions([]);
       }
-    }; // <--- fetchSuggestions() async function ends here
+    };
 
     fetchSuggestions();
 
@@ -47,20 +44,21 @@ export default function Searchbar({ onCitySelect }) {
       cancelRequest = true;
     };
 
-  }, [searchQuery]); // <--- useEffect() ends here
+  }, [searchQuery]);
 
   const handleInputChange = event => {
     setSearchQuery(event.target.value);
-  }; // <--- handleInputChange() function ends here
+  };
 
   const handleCityClick = async (city, country, state, lat, lon) => {
     onCitySelect(city, lat, lon);
+    setSearchQuery(''); //Clears the search query
     console.log('Selected City:', city);
     console.log('Country:', country);
     console.log('State:', state);
     console.log('Latitude:', lat);
     console.log('Longitude:', lon);
-  }; //  <--- handleCityClick() function ends here
+  };
 
   return (
     <>
@@ -89,11 +87,10 @@ export default function Searchbar({ onCitySelect }) {
           </ul>
         )}
       </SearchResults>
-
     </>
   );
 
-} // <--- Searchbar() function ends here
+}
 
 Searchbar.propTypes = {
   onCitySelect: PropTypes.func.isRequired,

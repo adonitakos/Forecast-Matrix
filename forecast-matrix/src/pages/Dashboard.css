@@ -4,9 +4,21 @@ File: /src/pages/Dashboard.css
 
 .dashboard-container {
   text-align: center;
+  position: relative;
 }
   
-.dashboard-heading {
-  margin-top: 50px;
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
-  
+.weather-container {
+  margin-top: 20px;
+  z-index: 1;
+}
+
+.news-container {
+  margin-top: 20px;
+}
