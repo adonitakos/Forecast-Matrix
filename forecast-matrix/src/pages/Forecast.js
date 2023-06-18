@@ -14,8 +14,8 @@ export default function Forecast() {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [showWeatherCard, setShowWeatherCard] = useState(false);
-  const [humidity, setHumidity] = useState('');
-  const [windspeed, setWindspeed] = useState('');
+  const [weatherData, setWeatherData] = useState(null);
+  const [aqiData, setAQIData] = useState(null);
 
   const handleCitySelection = async(city, lat,lon) => {
     setSelectedCity(city);
@@ -26,8 +26,8 @@ export default function Forecast() {
     const aqiData = await fetchAQIData(lat, lon);
     console.log(weatherData);
     console.log(aqiData);
-    const pm2_5Values = weatherData.hourly.pm2_5;//Humidity
-    setWindspeed(weatherData.hourly.windspeed_10m);
+    setWeatherData(weatherData);
+    setAQIData(aqiData);
     //setHumidity(humidity);
   };
 
@@ -65,19 +65,29 @@ export default function Forecast() {
 
   return (
     <div className="dashboard-container">
-      <h1 className='dashboard-heading'>Dashboard</h1>
-      <Searchbar onCitySelect={handleCitySelection} />
+        <h1 className='dashboard-heading'>Dashboard</h1>
+        <Searchbar onCitySelect={handleCitySelection} />
 
-      <div className="content-container">
-        {showWeatherCard && <WeatherCard city={selectedCity} humidity={humidity} windspeed={windspeed}/>}
+        <div div className="content-container">
+            <div className='WeatherCard'>
+                {showWeatherCard && weatherData && weatherData.hourly && (
+                <WeatherCard 
+                city={selectedCity} 
+                humidity={weatherData.hourly.relativehumidity_2m} 
+                windspeed={weatherData.hourly.windspeed_10m} 
+                aqi={parseFloat(aqiData && aqiData.hourly && aqiData.hourly.pm2_5).toFixed(2)}
+                temperature={parseFloat(weatherData.hourly.temperature_2m).toFixed(2)}                />
+                )}     
+            </div>
+          
         <div className="weather-container">
           <Weather latitude={latitude} longitude={longitude} />
+            </div>
         </div>
-      </div>
 
-      <div className="news-container">
-        <News selectedCity={selectedCity} />
-      </div>
+        <div className="news-container">
+            <News selectedCity={selectedCity} />
+        </div>
     </div>
   );
 
