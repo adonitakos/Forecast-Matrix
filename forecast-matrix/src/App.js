@@ -3,9 +3,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 // Pages
-import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/ErrorPage';
-import TestPage from './pages/TestPage'
 import News from './components/News/News';
 import Weather from './components/Weather/Weather';
 import Forecast from './pages/Forecast';
@@ -16,9 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Forecast />} />
         <Route path="*" element={<ErrorPage/>} />
-        <Route path="/testpage" element={<TestPage/>} />
         <Route path="/news" element={<News/>} />
-        
         <Route path="/dashboard" element={<Dashboard/>} />
 
 

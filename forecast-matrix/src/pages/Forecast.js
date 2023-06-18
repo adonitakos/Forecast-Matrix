@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import Searchbar from '../components/SearchBar/Searchbar';
 import News from '../components/News/News';
 import "./Dashboard.css"
-import "../components/TestComponents/WeatherCard.css"
-import WeatherCard from '../components/TestComponents/WeatherCard';
+import "../components/Weather/WeatherCard.css"
+import WeatherCard from '../components/Weather/WeatherCard';
 import Weather from '../components/Weather/Weather';
 import { WeatherData, fetchAQIData } from '../components/Weather/WeatherData';
 
 export default function Forecast() {
-  
+  // State Variables:
   const [selectedCity, setSelectedCity] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
@@ -29,7 +29,7 @@ export default function Forecast() {
     setWeatherData(weatherData);
     setAQIData(aqiData);
     //setHumidity(humidity);
-  };
+  }; // <--- handleCitySelection() async function ends here
 
   // Get the CURRENT Data & Time of the user
   const getCurrentDT = () => {
@@ -71,12 +71,13 @@ export default function Forecast() {
         <div div className="content-container">
             <div className='WeatherCard'>
                 {showWeatherCard && weatherData && weatherData.hourly && (
-                <WeatherCard 
-                city={selectedCity} 
-                humidity={weatherData.hourly.relativehumidity_2m} 
-                windspeed={weatherData.hourly.windspeed_10m} 
-                aqi={parseFloat(aqiData && aqiData.hourly && aqiData.hourly.pm2_5).toFixed(2)}
-                temperature={parseFloat(weatherData.hourly.temperature_2m).toFixed(2)}                />
+                  <WeatherCard 
+                    city={selectedCity} 
+                    humidity={weatherData.hourly.relativehumidity_2m} 
+                    windspeed={weatherData.hourly.windspeed_10m} 
+                    aqi={parseFloat(aqiData && aqiData.hourly && aqiData.hourly.pm2_5).toFixed(2)}
+                    temperature={parseFloat(weatherData.hourly.temperature_2m).toFixed(2)}                
+                  />
                 )}     
             </div>
           

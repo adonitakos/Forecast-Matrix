@@ -7,7 +7,7 @@ const WeatherCard = ({ city, temperature, windSpeed, aqi, pressure }) => {
   
   return(
     <>
-  <div className="cardm">
+    <div className="cardm">
       <div className="card">
       <svg
           className="weather"

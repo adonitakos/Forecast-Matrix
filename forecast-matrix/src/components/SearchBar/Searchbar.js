@@ -90,7 +90,7 @@ export default function Searchbar({ onCitySelect }) {
     </>
   );
 
-}
+} // <--- Searchbar() function ends here
 
 Searchbar.propTypes = {
   onCitySelect: PropTypes.func.isRequired,
