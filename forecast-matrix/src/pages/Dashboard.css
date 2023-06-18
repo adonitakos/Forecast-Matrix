@@ -2,17 +2,21 @@
   text-align: center;
   position: relative;
 }
-  
+
 .content-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-top: 20px;
 }
+
+.weather-news-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .weather-container {
-  margin-top: 20px;
-  z-index: 1;
+  position: relative;
+  margin-right: 20px;
 }
 
 .news-container {
