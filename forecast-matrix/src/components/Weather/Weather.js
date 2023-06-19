@@ -18,7 +18,7 @@ function Weather({ latitude, longitude }) {
 
   useEffect(() => {
     fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=40.76&longitude=-73.59&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,windspeed_10m&daily=temperature_2m_max,apparent_temperature_max,uv_index_max,precipitation_probability_max,windspeed_10m_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&past_days=7&timezone=America%2FNew_York"
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,windspeed_10m&daily=temperature_2m_max,apparent_temperature_max,uv_index_max,precipitation_probability_max,windspeed_10m_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&past_days=7&timezone=America%2FNew_York`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -31,18 +31,18 @@ function Weather({ latitude, longitude }) {
         setcurrentRealFeel(json.hourly.apparent_temperature[0]);
         
       });
-  }, []);
+  }, [latitude, longitude]);
 
   useEffect(() => {
     fetch(
-      'https://air-quality-api.open-meteo.com/v1/air-quality?latitude=40.71&longitude=-74.01&hourly=pm2_5&timezone=America%2FNew_York&past_days=7'
+      `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${latitude}&longitude=${longitude}&hourly=pm2_5&timezone=America%2FNew_York&past_days=7`
     )
       .then((response) => response.json())
       .then((json) => {
         setAQIData(json);
         setCurrentAQI(json.hourly.pm2_5[0]);
       });
-  }, []);
+  }, [latitude, longitude]);
 
   const getDateTime = (timeString) => {
     const date = new Date(timeString);
@@ -73,6 +73,7 @@ function Weather({ latitude, longitude }) {
     <>
       {weatherData && aqiData && (
         <>
+        
           {/* Current Weather Information */}
           <h2>Current Weather:</h2>
           <p>Time: {currentTime}</p>
@@ -85,8 +86,7 @@ function Weather({ latitude, longitude }) {
           
           {/* Daily Weather Information */}
           <br></br>
-          <br></br>
-          <h2 style={{marginTop:'9rem'}}>Daily Weather:</h2>
+          <h2 style={{marginTop:'10rem'}}>Daily Weather:</h2>
           <div className="weather-slideshow">
             {weatherData.daily &&
               weatherData.daily.temperature_2m_max &&
@@ -96,7 +96,7 @@ function Weather({ latitude, longitude }) {
                 const dateTime = getDateTime(weatherDateTime);
 
                 return (
-                  <div key={index}className='weather-card'>
+                  <div key={index} className='weather-card'>
                     <p className='time'>Time: {dateTime}</p>
                     <hr></hr>
                     <p>Temperature: {temp}°F</p>
@@ -123,9 +123,8 @@ function Weather({ latitude, longitude }) {
                     <p>-------------------------------------</p>
                   </div>
                 );
-            })}
+              })}
           </div>
-          
         </>
       )}
     </>
