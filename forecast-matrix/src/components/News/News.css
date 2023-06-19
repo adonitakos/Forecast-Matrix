@@ -2,6 +2,8 @@
     padding: 20px;
     height: 400px;
     overflow-y: auto;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 43%, rgb(252, 252, 252) 100%, rgba(255,255,255,1) 100%); 
   }
   
   .news-heading {

@@ -9,7 +9,8 @@
     margin-right: 10px;
     border: 1px solid #ccc;
     padding: 10px;
-    background-color: #e0f2ff;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 16%, rgba(231,251,255,1) 52%, rgba(0,212,255,1) 100%, rgba(255,255,255,1) 100%); 
     border-radius: 20px;
   }
   
@@ -26,4 +27,9 @@
 
   .WeatherCard{
     font-size: 12;
+  }
+  .weather-container{
+    
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 41%, rgba(0,212,255,1) 100%); 
   }
