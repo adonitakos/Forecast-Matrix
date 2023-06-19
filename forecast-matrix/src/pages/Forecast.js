@@ -31,7 +31,6 @@ export default function Forecast() {
     //setHumidity(humidity);
   };
 
-
   return (
     <div className="dashboard-container">
       <h1 className='dashboard-heading'>Dashboard</h1>
@@ -42,19 +41,27 @@ export default function Forecast() {
           <div className='WeatherCard'>
             {weatherData && weatherData.hourly && (
               <WeatherCard
-                city={selectedCity}
+              
+                city={selectedCity }
                 humidity={parseFloat(weatherData.hourly.relativehumidity_2m).toFixed(1)}
                 windspeed={parseFloat(weatherData.hourly.windspeed_10m).toFixed(1)}
                 aqi={parseFloat(aqiData && aqiData.hourly && aqiData.hourly.pm2_5).toFixed(2)}
                 precipitation={parseFloat(weatherData.hourly.precipitation_probability).toFixed(2)}
                 realfeel={parseFloat(weatherData.hourly.apparent_temperature)}
-                temperature={parseFloat(weatherData.hourly.temperature_2m).toFixed(2)}                />
-                )}     
-            </div>
-          
-        <div className="weather-container">
-          <Weather latitude={latitude} longitude={longitude} />
-        </div>
+                temperature={parseFloat(weatherData.hourly.temperature_2m).toFixed(2)}
+              />
+            )}
+          </div>
+            
+          <div className="weather-container">
+            {weatherData && ( 
+              <Weather
+                latitude={latitude}
+                longitude={longitude}
+                setCurrentTemperature={setCurrentTemperature}
+              />
+            )}
+          </div>
         </div>
       )}
 

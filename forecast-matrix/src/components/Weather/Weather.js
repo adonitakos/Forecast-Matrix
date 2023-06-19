@@ -82,7 +82,7 @@ function Weather({ latitude, longitude }) {
           <p>Precipitation: {currentPrecipitation}%</p>
           <p>Wind Speed: {currentWindSpeed} mph</p>
           <p>AQI (PM2.5): {currentAQI}</p>
-
+          
           {/* Daily Weather Information */}
           <br></br>
           <br></br>
