@@ -85,7 +85,7 @@ export default function Forecast() {
                 windspeed={parseFloat(weatherData.hourly.windspeed_10m).toFixed(1)} 
                 aqi={parseFloat(aqiData && aqiData.hourly && aqiData.hourly.pm2_5).toFixed(2)}
                 precipitation={parseFloat(weatherData.hourly.precipitation_probability).toFixed(2)}
-                realfeel={parseFloat(weatherData.hourly.apparent_temperature)}
+                realfeel={parseFloat(weatherData.hourly.apparent_temperature).toFixed(0)}
                 temperature={parseFloat(weatherData.hourly.temperature_2m).toFixed(2)}                />
                 )}     
             </div>

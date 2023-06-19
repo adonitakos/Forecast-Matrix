@@ -10,11 +10,11 @@ function Weather({ latitude, longitude }) {
   const [currentWindSpeed, setCurrentWindSpeed] = useState(null);
   const [currentAQI, setCurrentAQI] = useState(null);
   const [currentTime, setCurrentTime] = useState(null);
+  const [currentRealFeel, setcurrentRealFeel] = useState(null);
   const [dailyTemp, setdailyTemp] = useState(null);
-  // const [currentPrecipitation, setCurrentPrecipitation] = useState(null);
-  // const [currentWindSpeed, setCurrentWindSpeed] = useState(null);
-  // const [currentAQI, setCurrentAQI] = useState(null);
-  // const [currentTime, setCurrentTime] = useState(null);
+  const [dailyPrecipitation, setdailyPrecipitation] = useState(null);
+  const [dailyrealFeel, setdailyrealFeel] = useState(null);
+
 
   useEffect(() => {
     fetch(
@@ -28,6 +28,7 @@ function Weather({ latitude, longitude }) {
         setCurrentHumidity(json.hourly.relativehumidity_2m[0]);
         setCurrentPrecipitation(json.hourly.precipitation_probability[0]);
         setCurrentWindSpeed(json.hourly.windspeed_10m[0]);
+        setcurrentRealFeel(json.hourly.apparent_temperature[0]);
         
       });
   }, []);
@@ -76,6 +77,7 @@ function Weather({ latitude, longitude }) {
           <h2>Current Weather:</h2>
           <p>Time: {currentTime}</p>
           <p>Temperature: {currentTemperature}°F</p>
+          <p>Real Feel: {currentRealFeel}°F</p>
           <p>Humidity: {currentHumidity}%</p>
           <p>Precipitation: {currentPrecipitation}%</p>
           <p>Wind Speed: {currentWindSpeed} mph</p>
