@@ -9,6 +9,8 @@ import TestPage from './pages/TestPage'
 import News from './components/News/News';
 import Weather from './components/Weather/Weather';
 import Forecast from './pages/Forecast';
+import CurrentWeather from './components/Weather/currentweather';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Route path="/testpage" element={<TestPage/>} />
         <Route path="/news" element={<News/>} />
         <Route path="/Weather" element={<Weather/>} />
+        <Route path="/current" element={<CurrentWeather/>} />
 
         <Route path="/dashboard" element={<Dashboard/>} />
 
