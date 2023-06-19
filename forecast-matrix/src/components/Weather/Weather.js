@@ -10,10 +10,15 @@ function Weather({ latitude, longitude }) {
   const [currentWindSpeed, setCurrentWindSpeed] = useState(null);
   const [currentAQI, setCurrentAQI] = useState(null);
   const [currentTime, setCurrentTime] = useState(null);
+  const [dailyTemp, setdailyTemp] = useState(null);
+  // const [currentPrecipitation, setCurrentPrecipitation] = useState(null);
+  // const [currentWindSpeed, setCurrentWindSpeed] = useState(null);
+  // const [currentAQI, setCurrentAQI] = useState(null);
+  // const [currentTime, setCurrentTime] = useState(null);
 
   useEffect(() => {
     fetch(
-      "https://api.open-meteo.com/v1/forecast?latitude=40.71&longitude=-74.01&hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&past_days=7"
+      "https://api.open-meteo.com/v1/forecast?latitude=40.76&longitude=-73.59&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,windspeed_10m&daily=temperature_2m_max,apparent_temperature_max,uv_index_max,precipitation_probability_max,windspeed_10m_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&past_days=7&timezone=America%2FNew_York"
     )
       .then((response) => response.json())
       .then((json) => {
@@ -76,15 +81,15 @@ function Weather({ latitude, longitude }) {
           <p>Wind Speed: {currentWindSpeed} mph</p>
           <p>AQI (PM2.5): {currentAQI}</p>
 
-          {/* Hourly Weather Information */}
+          {/* Daily Weather Information */}
           <br></br>
           <br></br>
-          <h2>Hourly Weather:</h2>
+          <h2 style={{marginTop:'9rem'}}>Daily Weather:</h2>
           <div className="weather-slideshow">
-            {weatherData.hourly &&
-              weatherData.hourly.temperature_2m &&
-              weatherData.hourly.temperature_2m.map((temp, index) => {
-                const weatherDateTime = weatherData.hourly.time[index];
+            {weatherData.daily &&
+              weatherData.daily.temperature_2m_max &&
+              weatherData.daily.temperature_2m_max.map((temp, index) => {
+                const weatherDateTime = weatherData.daily.time[index];
                 const aqiDateTime = aqiData.hourly.time[index];
                 const dateTime = getDateTime(weatherDateTime);
 
@@ -93,27 +98,27 @@ function Weather({ latitude, longitude }) {
                     <p className='time'>Time: {dateTime}</p>
                     <hr></hr>
                     <p>Temperature: {temp}°F</p>
-                    {weatherData.hourly.relativehumidity_2m && (
+                    {weatherData.daily.temperature_2m_max && (
                       <p>
-                        Relative Humidity:{' '}
-                        {weatherData.hourly.relativehumidity_2m[index]}%
+                        Real Feel Temp:{' '}
+                        {weatherData.daily.apparent_temperature_max[index]}°F
                       </p>
                     )}
-                    {weatherData.hourly.precipitation_probability && (
+                    {weatherData.daily.precipitation_probability_max && (
                       <p>
                         Precipitation Probability:{' '}
-                        {weatherData.hourly.precipitation_probability[index]}%
+                        {weatherData.daily.precipitation_probability_max[index]}%
                       </p>
                     )}
-                    {weatherData.hourly.windspeed_10m && (
+                    {weatherData.daily.windspeed_10m_max && (
                       <p>
-                        Wind Speed: {weatherData.hourly.windspeed_10m[index]} mph
+                        Wind Speed: {weatherData.daily.windspeed_10m_max[index]} mph
                       </p>
                     )}
                     {aqiData.hourly.pm2_5 && (
                       <p>AQI (PM2.5): {aqiData.hourly.pm2_5[index]}</p>
                     )}
-                    <p>--------------------------------------</p>
+                    <p>-------------------------------------</p>
                   </div>
                 );
             })}
